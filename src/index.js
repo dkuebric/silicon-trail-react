@@ -16,12 +16,7 @@ const render = (Component) => {
 Game.debugInit()
 //Game.debugAutoplay()
 
-/* XXX hack */
-function renderLoop() {
-  render(App)
-  setTimeout(renderLoop, 100)
-}
-renderLoop()
+render(App)
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./App', () => { render(App) })

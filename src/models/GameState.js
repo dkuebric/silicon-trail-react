@@ -23,6 +23,7 @@ class Game {
   step () {
     this._events = this._events.concat(this._company.step())
     this._month++
+    return this
   }
 
   get company () {
