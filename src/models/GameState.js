@@ -29,12 +29,7 @@ class Game {
 
   get date () {
     // TODO: probably a better way to do this
-    return START_TIME.clone().add(this._month, 'months')
-  }
-
-  get month () {
-    // TODO: remove this debug
-    alert("shouldn't be calling this anymore")
+    return START_TIME.clone().add(this._month, 'months').format('MMMM YYYY')
   }
 
   /**

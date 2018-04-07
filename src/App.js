@@ -17,7 +17,7 @@ const App = () => (
       <TeamStatus company={Game.company}/>
       <Grid>
         <Grid.Column computer={6} mobile={16}>
-          <h2>{Game.date.format('MMMM YYYY')}</h2>
+          <h2>{Game.date}</h2>
           <Feed events={Game.events} />
         </Grid.Column>
         <Grid.Column computer={10} mobile={16}>

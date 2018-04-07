@@ -1,5 +1,7 @@
 import React from 'react'
 
+import * as styles from './Morale.less'
+
 class Morale extends React.Component {
   constructor(props) {
     super(props)
@@ -25,7 +27,7 @@ class Morale extends React.Component {
   }
 
   render() {
-    return <span>Morale: {this._moraleToIcon()}</span>
+    return <div>Morale: <span className={styles.emoji}>{this._moraleToIcon()}</span></div>
   }
 }
 

@@ -5,7 +5,7 @@ class Event {
   constructor (level, entity, message) {
     this._level = level
     this._entity = entity
-    this._time = Game.date.format('MMMM YYYY')
+    this._timeString = Game.date
     this._message = message
   }
 
@@ -28,7 +28,7 @@ class Event {
   feedEvent () {
     /* TODO: use moment.js for nicer-looking dates throughout */
     return {className: this._levelToClass(),
-            date: this._time,
+            date: this._timeString,
             image: this._entity.icon,
             meta: null, // TODO: can take advantage of this
             summary: this._message}
