@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-import Character from './Character'
+import { Founder, Engineer } from './Character'
 import Company from './Company'
 
 let START_TIME = moment("20100101")
@@ -11,6 +11,13 @@ class Game {
     this._events = []
     this._month = 0
     this._player = player
+  }
+
+  /**
+   * Check that all inputs are set in valid states (as reflected by model current* values)
+   */
+  readyToStep() {
+    return this._company.readyToStep()
   }
 
   step () {
@@ -36,8 +43,8 @@ class Game {
    * Init a scenario for dev/test
    */
   debugInit () {
-    let p = new Character('dan', 'test', true, 0)
-    let e1 = new Character('steve', 'other', false, 100)
+    let p = new Founder('dan')
+    let e1 = new Engineer('steve', 100)
     let c = new Company('newco')
     c.hire(p)
     c.hire(e1)

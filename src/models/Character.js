@@ -14,6 +14,8 @@ class Character extends Entity {
     this._morale = 100
     this._salary = 100 * 1000
     this._company = null
+    this._actions = null
+    this._currentAction = null
   }
 
   step () {
@@ -24,6 +26,8 @@ class Character extends Entity {
       this._company.fire(this)
       events.push(new Event('error', this, `${this.name} got disgruntled and quit!`))
     }
+
+    events.push(new Event('info', this, `${this.name} did ${this._currentAction}`))
 
     this._exp++
 
@@ -42,6 +46,18 @@ class Character extends Entity {
 
   setCompany (c) {
     this._company = c
+  }
+
+  setAction (a) {
+    this._currentAction = a
+  }
+
+  get currentAction () {
+    return this._currentAction
+  }
+
+  get actions () {
+    return this._actions
   }
 
   get name () {
@@ -65,4 +81,18 @@ class Character extends Entity {
   }
 }
 
-export default Character
+class Founder extends Character {
+  constructor (name) {
+    super(name, 'Founder', true, 100)
+    this._actions = ['Build', 'Recruit', 'Sell', 'Thought-Lead']
+  }
+}
+
+class Engineer extends Character {
+  constructor (name, exp) {
+    super(name, 'Engineer', false, exp)
+    this._actions = ['Build', 'Remediate Debt', 'Recruit']
+  }
+}
+
+export { Founder, Engineer }

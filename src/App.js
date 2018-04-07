@@ -8,7 +8,13 @@ import 'styling/semantic.less'
 
 function globalStep(e) {
   e.preventDefault()
-  Game.step()
+  let errors = Game.readyToStep()
+  if (!errors) {
+    Game.step()
+  } else {
+    alert(errors)
+    console.log(errors)
+  }
 }
 
 const App = () => (

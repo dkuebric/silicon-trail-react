@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Header, Image, List, Segment } from 'semantic-ui-react'
+import ActionSelector from 'components/ActionSelector'
 import Morale from 'components/Morale'
 
 class TeamStatus extends React.Component {
@@ -15,7 +16,10 @@ class TeamStatus extends React.Component {
                   <Card.Content>
                     <Card.Header>{e.name}</Card.Header>
                     <Card.Meta>{e.prof}</Card.Meta>
-                    <Card.Description><Morale employee={e}/></Card.Description>
+                    <Card.Description>
+                      <Morale employee={e}/>
+                      <ActionSelector employee={e} />
+                    </Card.Description>
                   </Card.Content>
                 </Card>
               </List.Item>))

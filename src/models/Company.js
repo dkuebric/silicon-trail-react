@@ -8,6 +8,16 @@ class Company extends Entity {
     this._employees = []
   }
 
+  /* see Game.readyToStep */
+  readyToStep() {
+    for (var e of this._employees) {
+      if (e.currentAction === null) {
+        return 'Set actions for all employees!'
+      }
+    }
+    return null
+  }
+
   step () {
     let events = this.doPayroll()
     for (var e of this._employees) {
