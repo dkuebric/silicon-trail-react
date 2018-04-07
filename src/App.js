@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Grid, Header, List, Segment } from 'semantic-ui-react'
+import { Button, Feed, Grid, Header, List, Segment } from 'semantic-ui-react'
 import TeamStatus from './components/TeamStatus'
 
 import Game from './models/GameState'
@@ -13,18 +13,17 @@ function globalStep(e) {
 
 const App = () => (
     <Segment>
-      <Header as='h1'>Your example App</Header>
-
+      <Header as='h1'>Silicon Trail</Header>
+      <TeamStatus company={Game.company}/>
       <Grid>
         <Grid.Column computer={6} mobile={16}>
-          <h2>Month: {Game._month}</h2>
+          <h2>{Game.date.format('MMMM YYYY')}</h2>
+          <Feed events={Game.events} />
         </Grid.Column>
         <Grid.Column computer={10} mobile={16}>
-          <Header as='h3'>Themed <code>Button</code></Header>
-          <Button primary onClick={globalStep}>End month</Button>
+          <Button primary onClick={globalStep}>Next month</Button>
         </Grid.Column>
       </Grid>
-      <TeamStatus company={Game.company}/>
     </Segment>
 )
 

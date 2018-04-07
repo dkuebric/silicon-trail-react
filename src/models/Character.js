@@ -1,5 +1,12 @@
-class Character {
+import Entity from './Entity'
+import Event from './Event'
+
+var employeeId = 1
+
+class Character extends Entity {
   constructor (name, prof, pc, exp) {
+    super(name)
+    this.id = employeeId++
     this._name = name
     this._prof = prof
     this._pc = pc
@@ -15,7 +22,7 @@ class Character {
     if (this._morale < 5 && !this._pc) {
       // rage quit
       this._company.fire(this)
-      events.push(`${this.name} got disgruntled and quit!`)
+      events.push(new Event('error', this, `${this.name} got disgruntled and quit!`))
     }
 
     this._exp++
@@ -55,10 +62,6 @@ class Character {
 
   get salary () {
     return this._salary
-  }
-
-  toString () {
-    return `Player(${this.name},${this._prof})`
   }
 }
 

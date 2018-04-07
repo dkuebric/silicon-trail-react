@@ -5,19 +5,19 @@ class Morale extends React.Component {
     super(props)
   }
 
-  moraleToIcon() {
+  _moraleToIcon() {
     let m = this.props.employee.morale
     if (m >= 100) {
       return '😁'
-    } else if (m >= 75) {
+    } else if (m >= 80) {
       return '😀'
-    } else if (m > 50) {
+    } else if (m > 60) {
       return '🙂'
-    } else if (m > 25) {
+    } else if (m > 40) {
       return '😐'
-    } else if (m > 15) {
+    } else if (m > 20) {
       return '🤔'
-    } else if (m > 5) {
+    } else if (m > 10) {
       return '😤'
     } else {
       return '🤬'
@@ -25,7 +25,7 @@ class Morale extends React.Component {
   }
 
   render() {
-    return <span>Morale: {this.moraleToIcon()}</span>
+    return <span>Morale: {this._moraleToIcon()}</span>
   }
 }
 

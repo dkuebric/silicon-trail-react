@@ -1,16 +1,16 @@
-class Company {
+import Entity from './Entity'
+import Event from './Event'
+
+class Company extends Entity {
   constructor (name) {
-    this._name = name
+    super(name)
     this._money = 1000 * 1000
     this._employees = []
   }
 
   step () {
-    let events = []
+    let events = this.doPayroll()
     for (var e of this._employees) {
-      if (!e.getPaid(this.paySalary(e.salary))) {
-        events.push(`Couldn't afford to pay ${e.name}'s paycheck!`)
-      }
       events = events.concat(e.step())
     }
     return events
@@ -26,6 +26,25 @@ class Company {
     this._employees = this._employees.filter(e => e !== c)
   }
 
+  doPayroll () {
+    let events = []
+    let before = this._money
+    let fail = false
+    for (var e of this._employees) {
+      if (!e.getPaid(this.paySalary(e.salary))) {
+        events.push(new Event('warn', this, `Couldn't afford to pay ${e.name}'s paycheck!`))
+        fail = true
+      }
+    }
+    let paid = before - this._money
+    if (!fail) {
+      events.unshift(new Event('info', this, `Ran payroll for $${paid}`))
+    } else {
+      events.unshift(new Event('error', this, "Didn't have enough money to cover payroll this month!"))
+    }
+    return events
+  }
+
   paySalary (x) {
     this._money -= x
     if (this._money < 0) {
@@ -33,10 +52,6 @@ class Company {
       return false
     }
     return true
-  }
-
-  get name () {
-    return this._name
   }
 
   get employees () {

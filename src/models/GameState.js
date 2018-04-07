@@ -1,20 +1,40 @@
+import moment from 'moment'
+
 import Character from './Character'
 import Company from './Company'
 
+let START_TIME = moment("20100101")
+
 class Game {
   constructor (player, company) {
-    this._month = 1
-    this._player = player
     this._company = company
+    this._events = []
+    this._month = 0
+    this._player = player
   }
 
   step () {
+    this._events = this._events.concat(this._company.step())
     this._month++
-    return this._company.step()
   }
 
   get company () {
     return this._company
+  }
+
+  get events () {
+    // TODO: maybe switch to using unshift everywhere so you don't have to do this
+    return this._events.slice().reverse().map((e, i) => e.feedEvent())
+  }
+
+  get date () {
+    // TODO: probably a better way to do this
+    return START_TIME.clone().add(this._month, 'months')
+  }
+
+  get month () {
+    // TODO: remove this debug
+    alert("shouldn't be calling this anymore")
   }
 
   /**
