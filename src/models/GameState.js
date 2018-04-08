@@ -45,7 +45,7 @@ class Game {
    */
   debugInit () {
     let p = new Founder('dan')
-    let e1 = new Engineer('steve', 100)
+    let e1 = new Engineer('steve', 50)
     let c = new Company('newco')
     c.hire(p)
     c.hire(e1)

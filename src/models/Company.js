@@ -6,6 +6,11 @@ class Company extends Entity {
     super(name)
     this._money = 1000 * 1000
     this._employees = []
+
+    this._product = 5
+    this._quality = 45
+    this._brand = 5
+    this._loyalty = 5
   }
 
   /* see Game.readyToStep */
@@ -23,7 +28,37 @@ class Company extends Entity {
     for (var e of this._employees) {
       events = events.concat(e.step())
     }
+
+    /* life takes its toll */
+    this._product--
+    this._quality--
+    this._brand--
+    this._loyalty--
+
     return events
+  }
+
+  improveProduct (exp) {
+    /* improving from n => n+1 costs n experience */
+    exp -= this._product
+    while (exp > 0) {
+      this._product++
+      exp -= this._product
+    }
+    if (this._product > 100) {
+      this._product = 100
+    }
+  }
+
+  improveQuality (exp) {
+    exp -= this._quality
+    while (exp > 0) {
+      this._quality++
+      exp -= this._quality
+    }
+    if (this._quality > 100) {
+      this._quality = 100
+    }
   }
 
   hire (c) {
@@ -70,6 +105,22 @@ class Company extends Entity {
 
   get money () {
     return this._money
+  }
+
+  get brand () {
+    return this._brand
+  }
+
+  get loyalty () {
+    return this._loyalty
+  }
+
+  get product () {
+    return this._product
+  }
+
+  get quality () {
+    return this._quality
   }
 }
 

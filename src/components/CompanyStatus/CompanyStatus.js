@@ -6,7 +6,7 @@ class CompanyStatus extends React.Component {
     return (
       <div>
         <Header as='h2'>{this.props.company.name}</Header>
-        <Progress percent={this.props.company.fit} color='blue'>Product-market fit</Progress>
+        <Progress percent={this.props.company.product} color='blue'>Product-market fit</Progress>
         <Progress percent={this.props.company.quality} color='orange'>Quality</Progress>
         <Progress percent={this.props.company.brand} color='purple'>Brand</Progress>
         <Progress percent={this.props.company.loyalty} color='red'>Loyalty</Progress>

@@ -8,12 +8,16 @@ class Character extends Entity {
     super(name)
     this.id = employeeId++
     this._name = name
-    this._prof = prof
-    this._pc = pc
-    this._exp = exp
+    this._prof = prof // profession; set by sub-class
+    this._pc = pc // is the player character?
+
+    this._exp = exp // experience; starts 10-100 and grows by 1/mo
+
     this._morale = 100
-    this._salary = 100 * 1000
+    this._salary = 10 * 1000 // monthly salary
+
     this._company = null
+
     this._actions = null
     this._currentAction = null
   }
@@ -21,13 +25,21 @@ class Character extends Entity {
   step () {
     let events = []
 
+    /* rage quits happen before the work gets done */
     if (this._morale < 5 && !this._pc) {
       // rage quit
       this._company.fire(this)
       events.push(new Event('error', this, `${this.name} got disgruntled and quit!`))
+      return events
     }
 
+    /* the work gets done */
     events.push(new Event('info', this, `${this.name} did ${this._currentAction}`))
+    if (this._currentAction === 'Build') {
+      this._company.improveProduct(this._exp)
+    } else if (this._currentAction === 'Remediate Debt') {
+      this._company.improveQuality(this._exp)
+    }
 
     this._exp++
 
@@ -83,7 +95,7 @@ class Character extends Entity {
 
 class Founder extends Character {
   constructor (name) {
-    super(name, 'Founder', true, 100)
+    super(name, 'Founder', true, 20)
     this._actions = ['Build', 'Recruit', 'Sell', 'Thought-Lead']
   }
 }
