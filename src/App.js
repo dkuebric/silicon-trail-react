@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Feed, Grid, Header, List, Segment } from 'semantic-ui-react'
+import CompanyStatus from './components/CompanyStatus'
 import TeamStatus from './components/TeamStatus'
 
 import Game from './models/GameState'
@@ -34,12 +35,13 @@ class App extends React.Component {
         <Header as='h1'>Silicon Trail</Header>
         <TeamStatus company={this.state.game.company}/>
         <Grid>
-          <Grid.Column computer={6} mobile={16}>
+          <Grid.Column computer={8} mobile={16}>
             <h2>{this.state.game.date}</h2>
+            <Button primary onClick={this.handleStep}>Next month</Button>
             <Feed events={this.state.game.events} />
           </Grid.Column>
-          <Grid.Column computer={10} mobile={16}>
-            <Button primary onClick={this.handleStep}>Next month</Button>
+          <Grid.Column computer={8} mobile={16}>
+            <CompanyStatus company={this.state.game.company}/>
           </Grid.Column>
         </Grid>
       </Segment>)

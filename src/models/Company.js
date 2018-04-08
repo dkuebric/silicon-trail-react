@@ -67,6 +67,10 @@ class Company extends Entity {
   get employees () {
     return this._employees
   }
+
+  get money () {
+    return this._money
+  }
 }
 
 export default Company
